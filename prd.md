@@ -1,3 +1,14 @@
+---
+title: 產品需求文件 (PRD)：Yenmi 個人品牌與履歷網站
+date: 2026-01-17
+project: yen的履歷網站
+tags: [project, resource, 系統]
+  - project
+  - resource
+  - me
+  - system
+---
+
 # 產品需求文件 (PRD)：Yenmi 個人品牌與履歷網站
 
 **文件版本**：1.0
@@ -31,13 +42,13 @@
 基於參考文件（Salford, Traction, Meet Our Team 簡報風格），網站設計需遵循以下規範：
 
 * **設計風格 (Look & Feel)**：
-  * **Pitch Deck 風格**：排版需類似新創募資簡報，強調大標題、清晰的資訊層級與留白。
-  * [cite_start]**質感**：背景使用帶有雜訊（Noise）的米白色或紙質紋理，營造沈穩且具人文溫度的氛圍 [cite: 11, 13]。
-  * **字體**：標題採用具現代感的襯線體（Serif）或粗體無襯線體，內文使用高易讀性的無襯線體。
+ * **Pitch Deck 風格**：排版需類似新創募資簡報，強調大標題、清晰的資訊層級與留白。
+ * [cite_start]**質感**：背景使用帶有雜訊（Noise）的米白色或紙質紋理，營造沈穩且具人文溫度的氛圍 [cite: 11, 13]。
+ * **字體**：標題採用具現代感的襯線體（Serif）或粗體無襯線體，內文使用高易讀性的無襯線體。
 * **配色方案**：
-  * [cite_start]**主色調**：深海綠（Deep Teal）或墨綠色（參考數據圖表配色），象徵專業與數據 [cite: 11]。
-  * **背景色**：米白/灰白色（Off-white），降低數位螢幕的刺眼感。
-  * **強調色**：使用高飽和度色彩（如螢光綠或亮橘）點綴 AI 相關關鍵字，突顯科技感。
+ * [cite_start]**主色調**：深海綠（Deep Teal）或墨綠色（參考數據圖表配色），象徵專業與數據 [cite: 11]。
+ * **背景色**：米白/灰白色（Off-white），降低數位螢幕的刺眼感。
+ * **強調色**：使用高飽和度色彩（如螢光綠或亮橘）點綴 AI 相關關鍵字，突顯科技感。
 
 ---
 
@@ -62,52 +73,52 @@
 
 * **版面設計**：參考 `Startup Pitch Deck` 封面，置中大標題。
 * **文案內容**：
-  * [cite_start]**H1**：Marketing Manager x System Builder [cite: 23]。
-  * [cite_start]**Sub-text**：結合 12 年品牌行銷經驗與 AI 自動化技術，為企業構建高效獲利系統 [cite: 1, 15]。
+ * [cite_start]**H1**：Marketing Manager x System Builder [cite: 23]。
+ * [cite_start]**Sub-text**：結合 12 年品牌行銷經驗與 AI 自動化技術，為企業構建高效獲利系統 [cite: 1, 15]。
 * **功能元件**：
-  * 主要 CTA 按鈕：「查看專案實績 (View Work)」。
-  * 次要 CTA 按鈕：「下載履歷 (Download Resume)」。
+ * 主要 CTA 按鈕：「查看專案實績 (View Work)」。
+ * 次要 CTA 按鈕：「下載履歷 (Download Resume)」。
 
 #### 3.2.2 Service & Skills (技能模組)
 
 * [cite_start]**版面設計**：參考 `Discover Our Services` 的卡片式 UI (Card UI)，橫向排列 [cite: 11]。
 * **內容邏輯**：將硬技能模組化展示。
-  * [cite_start]**模組 A - 品牌全案操盤**：包含品牌策略、OMO 佈局、群眾募資（Kickstarter/嘖嘖） [cite: 3, 5]。
-  * [cite_start]**模組 B - AI 數位轉型**：包含 AI Agent 開發、n8n/Make 自動化串接、降本增效解決方案 [cite: 10, 15]。
-  * [cite_start]**模組 C - 成長行銷 (Growth)**：包含 ROAS 優化、KOL/KOC 矩陣佈局、數據分析 (GA4/Looker Studio) [cite: 3, 12]。
+ * [cite_start]**模組 A - 品牌全案操盤**：包含品牌策略、OMO 佈局、群眾募資（Kickstarter/嘖嘖） [cite: 3, 5]。
+ * [cite_start]**模組 B - AI 數位轉型**：包含 AI Agent 開發、n8n/Make 自動化串接、降本增效解決方案 [cite: 10, 15]。
+ * [cite_start]**模組 C - 成長行銷 (Growth)**：包含 ROAS 優化、KOL/KOC 矩陣佈局、數據分析 (GA4/Looker Studio) [cite: 3, 12]。
 
 #### 3.2.3 Traction (關鍵績效展示)
 
 * [cite_start]**版面設計**：參考 `Traction` 簡報頁面，使用柱狀圖或數據大字報呈現動態成長感 [cite: 11]。
 * **關鍵數據 (Data Points)**：
-  * [cite_start]**ROAS 15.3**：Bitplay AquaSeal 專案實績 [cite: 5, 12]。
-  * [cite_start]**$10M+**：群眾募資累積金額 (千萬轉化) [cite: 5]。
-  * [cite_start]**50%**：透過 GenAI 工具節省的內容生成與報表工時 [cite: 3]。
-  * [cite_start]**300%**：品牌聯名活動 (Realive Concert) 的月營收成長 (M.O.M) [cite: 13]。
+ * [cite_start]**ROAS 15.3**：Bitplay AquaSeal 專案實績 [cite: 5, 12]。
+ * [cite_start]**$10M+**：群眾募資累積金額 (千萬轉化) [cite: 5]。
+ * [cite_start]**50%**：透過 GenAI 工具節省的內容生成與報表工時 [cite: 3]。
+ * [cite_start]**300%**：品牌聯名活動 (Realive Concert) 的月營收成長 (M.O.M) [cite: 13]。
 
 #### 3.2.4 About Me (活人感特質區)
 
 * [cite_start]**版面設計**：參考 `Meet Our Team`，使用流體線條與非正式照片（生活照或工作側拍） [cite: 13]。
 * **內容策略**：展現「賽博命理」與個人哲學，區隔傳統履歷的生硬感。
-  * [cite_start]**個人標籤**：ENFP、系統建造者、紫微斗數研究者 [cite: 23]。
-  * [cite_start]**哲學陳述**：「先有感，再有理」。強調在數據驅動的同時，保持對人性的洞察與溫柔 [cite: 23]。
-  * **興趣**：提及 Hanayama 益智玩具或對咖啡的喜好，增加立體感。
+ * [cite_start]**個人標籤**：ENFP、系統建造者、紫微斗數研究者 [cite: 23]。
+ * [cite_start]**哲學陳述**：「先有感，再有理」。強調在數據驅動的同時，保持對人性的洞察與溫柔 [cite: 23]。
+ * **興趣**：提及 Hanayama 益智玩具或對咖啡的喜好，增加立體感。
 
 #### 3.2.5 Experience Timeline (職涯歷程)
 
 * **呈現方式**：簡潔的時間軸，僅列出關鍵職位與核心成就（非流水帳）。
 * **資料來源**：
-  * [cite_start]**2025.12 - Present**：待業/接案/AI 系統開發 [cite: 23]。
-  * [cite_start]**2025.10 - 2025.12**：Mula (Yodao) - Marketing Manager (導入自動化監測) [cite: 3]。
-  * [cite_start]**2019 - 2024 (預估)**：Bitplay - 行銷主管 (Shopify, Kickstarter, 團隊管理) [cite: 5]。
-  * [cite_start]**2017 - 2019**：Giorgio Armani - 廣告公關 (CRM, VIP 活動) [cite: 7]。
-  * [cite_start]**2012 - 2017**：4A 廣告代理商 - 資深文案 (Panasonic, 統一) [cite: 8]。
+ * [cite_start]**2025.12 - Present**：待業/接案/AI 系統開發 [cite: 23]。
+ * [cite_start]**2025.10 - 2025.12**：Mula (Yodao) - Marketing Manager (導入自動化監測) [cite: 3]。
+ * [cite_start]**2019 - 2024 (預估)**：Bitplay - 行銷主管 (Shopify, Kickstarter, 團隊管理) [cite: 5]。
+ * [cite_start]**2017 - 2019**：Giorgio Armani - 廣告公關 (CRM, VIP 活動) [cite: 7]。
+ * [cite_start]**2012 - 2017**：4A 廣告代理商 - 資深文案 (Panasonic, 統一) [cite: 8]。
 
 #### 3.2.6 Contact & CTA (合作模式)
 
 * **文案**：明確區分合作類型。
-  * [cite_start]**Type A：全職行銷主管 (Full-time)** - 尋找能帶領團隊轉型的企業 [cite: 21, 24]。
-  * [cite_start]**Type B：專案顧問 (Consultant)** - 針對募資、AI 導入或特定行銷難題 [cite: 24]。
+ * [cite_start]**Type A：全職行銷主管 (Full-time)** - 尋找能帶領團隊轉型的企業 [cite: 21, 24]。
+ * [cite_start]**Type B：專案顧問 (Consultant)** - 針對募資、AI 導入或特定行銷難題 [cite: 24]。
 * **表單功能**：包含姓名、公司、合作類型選單。
 
 ---
