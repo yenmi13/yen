@@ -1,1099 +1,988 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yen | Marketing Manager x System Builder</title>
-    <meta name="description" content="資深行銷經理與 AI 系統建造者。12年經驗，ROAS 15.3，擅長品牌策略與自動化工作流。">
-
-    <!-- Open Graph / Social Media Preview -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Yen | Marketing Manager x AI Agent Builder">
-    <meta property="og:description" content="資深行銷經理與 AI 系統建造者。12年經驗，ROAS 15.3，擅長品牌策略與自動化工作流。">
-    <meta property="og:image" content="og-preview.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Yen | Marketing Manager x AI Agent Builder">
-    <meta name="twitter:description" content="資深行銷經理與 AI 系統建造者。12年經驗，ROAS 15.3，擅長品牌策略與自動化工作流。">
-    <meta name="twitter:image" content="og-preview.png">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-
-    <!-- GSAP via CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <style>
-        :root {
-            /* Palette */
-            --deep-teal: #004D4D;
-            --teal-light: #006666;
-            --off-white: #F5F5F0;
-            --sand: #EBEBE0;
-            --neon-green: #00FF94;
-            --neon-orange: #FF5E00;
-            --charcoal: #1A1A1A;
-
-            /* Typography */
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Inter', 'Noto Sans TC', sans-serif;
-
-            /* Spacing */
-            --container-width: 1200px;
-            --section-padding: 6rem;
-        }
-
-        /* 1. Reset & Global */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--off-white);
-            color: var(--charcoal);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Noise Texture */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* 2. Typography System */
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            color: var(--deep-teal);
-        }
-
-        .text-display-lg {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .text-section-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 2rem;
-        }
-
-        .text-mono {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .highlight-ai {
-            color: var(--neon-green);
-            /* Changed to text color for better readability on dark BG */
-        }
-
-        .bg-highlight-ai {
-            background-color: var(--neon-green);
-            color: var(--deep-teal);
-            padding: 0 0.4em;
-        }
-
-        /* 3. Navigation & Fixed Elements */
-        .star-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 101;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-        }
-
-        .star svg path {
-            fill: #FFB6C1;
-            stroke: #FFB6C1;
-        }
-
-        /* Distributed vertical scatter - scrolling with document */
-        .star-1 {
-            top: 400px;
-            right: 10%;
-            transform: rotate(-15deg);
-        }
-
-        .star-2 {
-            top: 1500px;
-            left: 5%;
-            transform: rotate(20deg);
-        }
-
-        .star-3 {
-            top: 2500px;
-            right: 15%;
-            transform: rotate(-10deg);
-        }
-
-        .star-4 {
-            top: 3500px;
-            left: 10%;
-            transform: rotate(15deg);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 0;
-            z-index: 100;
-            mix-blend-mode: difference;
-            color: white;
-            /* Visible against white due to difference mode */
-            transition: all 0.3s ease;
-        }
-
-        /* Smart contrast: switch to solid dark color on light/gray backgrounds */
-        nav.nav-dark {
-            mix-blend-mode: normal;
-            color: var(--deep-teal);
-            background: rgba(245, 245, 240, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-
-        .nav-links a {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: currentColor;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* 4. Hero Section */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: calc(4rem);
-        }
-
-        .hero-tag {
-            display: inline-block;
-            border: 1px solid var(--deep-teal);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 1rem;
-            margin-top: 4rem;
-            color: var(--deep-teal);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .kaomoji {
-            display: inline-block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            user-select: none;
-        }
-
-        .kaomoji:hover {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .hero-btns {
-            margin-top: 3rem;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            /* Slightly rounded */
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--deep-teal);
-            color: white;
-            border: 1px solid var(--deep-teal);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--deep-teal);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--deep-teal);
-            color: var(--deep-teal);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--deep-teal);
-            color: white;
-        }
-
-        /* 5. Traction Section (Data) */
-        #traction {
-            background-color: var(--deep-teal);
-            color: var(--off-white);
-            padding: var(--section-padding) 0;
-        }
-
-        #traction h2 {
-            color: var(--off-white);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 992px) {
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .metrics-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .metric-value {
-                font-size: 2.5rem;
-            }
-        }
-
-        .metric-item {
-            text-align: left;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 1.5rem;
-        }
-
-        .metric-value {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            color: var(--neon-green);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            font-size: 1rem;
-            opacity: 0.8;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* 6. About Section - Fluid */
-        #about {
-            padding: var(--section-padding) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tags-cloud {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .tag {
-            background: var(--sand);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            color: var(--deep-teal);
-        }
-
-        .about-visual {
-            position: relative;
-            height: 500px;
-            background: #E0E0DB;
-            border-radius: 8px;
-            /* Slight radius */
-            overflow: hidden;
-        }
-
-        .about-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 7. Core Services (Card UI) */
-        #services {
-            padding: 4rem 0;
-            background-color: var(--sand);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            align-items: stretch;
-        }
-
-        @media (max-width: 992px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-card {
-            background: var(--off-white);
-            padding: 2.5rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-height: 380px;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-        }
-
-        .module-badge {
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            border: 1px solid var(--deep-teal);
-            padding: 0.2rem 0.6rem;
-            border-radius: 50px;
-        }
-
-        .service-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-list {
-            list-style: none;
-            flex-grow: 1;
-            /* Fill remaining space */
-        }
-
-        .service-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .service-list li::before {
-            content: "→";
-            margin-right: 0.8rem;
-            color: var(--deep-teal);
-        }
-
-        .service-card.ai-card {
-            background: #E8E8E8;
-            color: var(--deep-teal);
-        }
-
-        .service-card.ai-card h3,
-        .service-card.ai-card .module-badge {
-            color: var(--deep-teal);
-            border-color: var(--deep-teal);
-        }
-
-        .service-card.ai-card .service-list li {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .service-card.ai-card .service-list li::before {
-            color: var(--deep-teal);
-        }
-
-        .service-card.social-card {
-            background: #E8E8E8;
-        }
-
-        /* 8. Experience Timeline */
-        #experience {
-            padding: var(--section-padding) 0;
-        }
-
-        .timeline-container {
-            border-left: 2px solid var(--deep-teal);
-            margin-left: 1rem;
-            padding-left: 3rem;
-        }
-
-        .timeline-block {
-            position: relative;
-            margin-bottom: 4rem;
-        }
-
-        .timeline-block::before {
-            content: "";
-            position: absolute;
-            left: -3.6rem;
-            top: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            background: var(--off-white);
-            border: 2px solid var(--deep-teal);
-            border-radius: 50%;
-        }
-
-        .timeline-date {
-            font-family: 'Courier New', monospace;
-            color: var(--teal-light);
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .timeline-role {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: var(--font-display);
-            margin-bottom: 0.2rem;
-        }
-
-        .timeline-company {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-desc {
-            max-width: 800px;
-            color: #4a4a4a;
-        }
-
-        /* 9. Contact */
-        #contact {
-            padding: var(--section-padding) 0;
-            background-color: var(--deep-teal);
-            color: white;
-            text-align: center;
-        }
-
-        #contact h2 {
-            color: white;
-        }
-
-        .contact-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 800px;
-            margin: 4rem auto;
-        }
-
-        @media (max-width: 768px) {
-            .contact-options {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .contact-box {
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 320px;
-        }
-
-        .contact-box:hover {
-            border-color: var(--neon-green);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .contact-role {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--neon-green);
-        }
-
-        .contact-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--charcoal);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-text {
-            font-size: 0.8rem;
-            opacity: 0.5;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .text-display-lg {
-                font-size: 3rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-visual {
-                height: 300px;
-            }
-
-            .hero-btns {
-                flex-direction: column;
-            }
-
-            .timeline-container {
-                padding-left: 2rem;
-            }
-
-            .timeline-block::before {
-                left: -2.6rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yenmi，具 12 年品牌與整合行銷經驗，專長是把業務、行銷與 AI 整合成可持續運作的流程。">
+  <meta name="theme-color" content="#b9aaf2">
+  <title>Yenmi 廖晏君 | Marketing × AI Workflow</title>
+  <link rel="canonical" href="https://yen-7yv.pages.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yenmi 廖晏君 | Marketing × AI Workflow">
+  <meta property="og:description" content="12 年品牌與整合行銷經驗，把業務、行銷與 AI 整理成能運作、能交接、能優化的系統。">
+  <meta property="og:url" content="https://yen-7yv.pages.dev/">
+  <meta property="og:image" content="https://yen-7yv.pages.dev/og-preview.png">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b9aaf2'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-style='italic' fill='%2323201c' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&amp;family=DM+Sans:wght@400;500;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "廖晏君",
+    "alternateName": "Yenmi",
+    "jobTitle": "Marketing Manager / AI Workflow Builder",
+    "knowsAbout": ["Integrated Marketing", "Meta Ads", "Marketing Automation", "SEO", "AI Workflow"],
+    "sameAs": ["https://www.threads.com/@a_novel_13", "https://github.com/yenmi13"]
+  }
+  </script>
+  <style>
+    /* 主題鎖定：仿印刷拼貼的單一淺色主題（scrapbook 風格以紙感為基底，不做深色模式） */
+    :root {
+      --paper: #f6f3ec;
+      --ink: #23201c;
+      --muted: #6b645c;
+      --lav: #b9aaf2;
+      --lav-soft: #e6e0fa;
+      --pink: #f6cdd9;
+      --pink-band: #f8dce6;
+      --mint: #abd3b6;
+      --mint-soft: #ddeee2;
+      --butter: #f5d98c;
+      --butter-soft: #faecc8;
+      --sky: #bfe0ef;
+      --d-purple: #6f55b3;
+      --display: "Playfair Display", "Noto Serif TC", serif;
+      --body: "DM Sans", "Noto Sans TC", sans-serif;
+      --max: 1240px;
+      --pad: clamp(20px, 4vw, 56px);
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      /* 圓角系統：互動元件全圓（pill）、卡片與資料夾 14-18px */
+      --r-card: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      /* 格紋紙基底（參考圖的方格紙語言） */
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 35px, rgba(35, 32, 28, .05) 35px 36px),
+        repeating-linear-gradient(90deg, transparent 0 35px, rgba(35, 32, 28, .05) 35px 36px);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p, ul { margin-top: 0; }
+    ::selection { background: var(--butter); color: var(--ink); }
+    :focus-visible { outline: 2.5px solid var(--d-purple); outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 120;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper);
+      transform: translateY(-180%);
+      transition: transform .25s var(--ease);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .shell { width: min(100%, var(--max)); margin: 0 auto; padding-inline: var(--pad); }
+
+    /* 貼紙語言：白底、墨線、硬投影 */
+    .sticker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 26px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-size: 14.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s ease;
+    }
+    .button:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+    .button:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+    .button.primary { background: var(--lav); }
+    .button.primary:hover { background: var(--lav-soft); }
+
+    .star {
+      display: inline-block;
+      width: 15px;
+      aspect-ratio: 1;
+      background: var(--butter);
+      clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+    }
+
+    /* 導覽 */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 90;
+      transition: background .3s ease, box-shadow .3s ease;
+    }
+    .nav.is-scrolled {
+      background: rgba(246, 243, 236, .94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1.5px 0 var(--ink);
+    }
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .wordmark {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 900;
+      font-size: 27px;
+      line-height: 1.2;
+    }
+    .nav-right { display: flex; align-items: center; gap: clamp(14px, 2.6vw, 34px); }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.6vw, 34px); }
+    .nav-links a { font-size: 14.5px; font-weight: 700; }
+    .nav-links a:hover { text-decoration: underline; text-decoration-thickness: 2.5px; text-underline-offset: 5px; text-decoration-color: var(--d-purple); }
+    .nav .button { min-height: 42px; padding: 0 20px; font-size: 13.5px; }
+    .menu-button { display: none; border: 1.5px solid var(--ink); border-radius: 999px; background: #fff; padding: 8px 16px; font-weight: 700; }
+
+    /* Hero：左文右拍立得的不對稱分割 */
+    .hero { padding-top: clamp(108px, 14vh, 150px); padding-bottom: clamp(48px, 7vw, 90px); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, .88fr);
+      gap: clamp(34px, 6vw, 90px);
+      align-items: center;
+    }
+    .hero h1 {
+      margin: 24px 0 22px;
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(58px, 8.6vw, 124px);
+      line-height: 1.02;
+      letter-spacing: -.02em;
+    }
+    .hero h1 em {
+      font-weight: 900;
+      padding-inline: .06em;
+      background: linear-gradient(transparent 58%, var(--pink) 58% 94%, transparent 94%);
+    }
+    .hero-kicker {
+      max-width: 540px;
+      margin-bottom: 34px;
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.75;
+    }
+    .hero-kicker strong { background: linear-gradient(transparent 62%, var(--butter) 62% 96%, transparent 96%); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .polaroid-wrap { position: relative; padding: 26px 10px 10px; }
+    .polaroid {
+      position: relative;
+      margin-left: auto;
+      width: min(100%, 360px);
+      padding: 12px 12px 16px;
+      background: #fff;
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 6px 6px 0 var(--ink);
+      transform: rotate(2.4deg);
+    }
+    .polaroid img { aspect-ratio: 4 / 4.6; object-fit: cover; object-position: 50% 30%; border-radius: 5px; }
+    .polaroid figcaption {
+      padding-top: 12px;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 19px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tape {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 110px;
+      height: 30px;
+      background: rgba(245, 217, 140, .85);
+      border: 1px solid rgba(35, 32, 28, .25);
+      transform: translateX(-50%) rotate(-3deg);
+    }
+    .badge-12 {
+      position: absolute;
+      z-index: 3;
+      left: -16px;
+      bottom: 30px;
+      width: 116px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      background: var(--butter);
+      box-shadow: 3px 3px 0 var(--ink);
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 21px;
+      line-height: 1.15;
+      text-align: center;
+      transform: rotate(-9deg);
+    }
+    .hero-star-a { position: absolute; top: 2px; right: 8%; width: 30px; }
+    .hero-star-b { position: absolute; bottom: -6px; right: -4px; width: 20px; background: var(--lav); }
+
+    /* 跑馬燈（全頁唯一一條） */
+    .marquee {
+      overflow: hidden;
+      border-block: 1.5px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      padding-block: 13px;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 34px;
+      width: max-content;
+      animation: marquee 26s linear infinite;
+    }
+    .marquee-track span {
+      display: inline-flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .marquee-track i { font-family: var(--display); font-style: normal; font-weight: 900; text-transform: none; letter-spacing: .06em; font-size: 16.5px; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    section { padding-block: clamp(76px, 10vw, 140px); }
+    .section-title {
+      margin: 0 0 clamp(38px, 5vw, 64px);
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(40px, 6vw, 78px);
+      line-height: 1.08;
+      letter-spacing: -.015em;
+      padding-bottom: .06em;
+    }
+    .section-title em { font-style: italic; font-weight: 900; }
+    .section-title .hl-pink { background: linear-gradient(transparent 60%, var(--pink) 60% 94%, transparent 94%); }
+    .section-title .hl-lav { background: linear-gradient(transparent 60%, var(--lav-soft) 60% 94%, transparent 94%); }
+    .section-title .hl-mint { background: linear-gradient(transparent 60%, var(--mint-soft) 60% 94%, transparent 94%); }
+
+    /* 方法論：三排手帳列 */
+    .approach-list { max-width: 880px; display: grid; gap: clamp(22px, 3vw, 34px); }
+    .approach-row {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: clamp(18px, 3vw, 34px);
+      align-items: start;
+    }
+    .approach-no {
+      width: 64px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 900;
+      font-size: 26px;
+    }
+    .approach-row:nth-child(1) .approach-no { background: var(--pink); transform: rotate(-5deg); }
+    .approach-row:nth-child(2) .approach-no { background: var(--mint); transform: rotate(4deg); }
+    .approach-row:nth-child(3) .approach-no { background: var(--sky); transform: rotate(-3deg); }
+    .approach-row h3 { margin-bottom: 6px; font-size: 21px; font-weight: 700; }
+    .approach-row p { margin: 0; color: var(--muted); max-width: 56ch; }
+
+    /* 精選案例：資料夾架 */
+    .work { background-color: var(--pink-band); border-block: 1.5px solid var(--ink);
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 35px, rgba(255, 255, 255, .5) 35px 36px),
+        repeating-linear-gradient(90deg, transparent 0 35px, rgba(255, 255, 255, .5) 35px 36px);
+    }
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(18px, 2.6vw, 30px);
+      margin-bottom: clamp(36px, 5vw, 56px);
+    }
+    .folder-btn { padding: 0; border: 0; background: none; cursor: pointer; text-align: center; transition: transform .3s var(--ease); }
+    .folder-btn:hover { transform: translateY(-5px); }
+    .folder { position: relative; display: block; height: 168px; margin-bottom: 16px; }
+    .paper {
+      position: absolute;
+      bottom: 52%;
+      width: 44%;
+      padding: 9px 8px 30px;
+      background: #fffdf8;
+      border: 1.5px solid var(--ink);
+      border-radius: 7px;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      transition: transform .3s var(--ease);
+    }
+    .paper-a { left: 6%; transform: rotate(-7deg); }
+    .paper-b { left: 29%; bottom: 56%; z-index: 1; }
+    .paper-c { right: 6%; transform: rotate(6deg); }
+    .folder-btn:hover .paper-a { transform: rotate(-9deg) translateY(-7px); }
+    .folder-btn:hover .paper-b { transform: translateY(-9px); }
+    .folder-btn:hover .paper-c { transform: rotate(8deg) translateY(-7px); }
+    .pocket {
+      position: absolute;
+      inset: auto 0 0;
+      height: 60%;
+      z-index: 2;
+      background: var(--folder-c, var(--pink));
+      border: 1.5px solid var(--ink);
+      border-radius: 12px var(--r-card) var(--r-card) var(--r-card);
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: box-shadow .3s var(--ease);
+    }
+    .pocket::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: -1.5px;
+      width: 38%;
+      height: 16px;
+      background: var(--folder-c, var(--pink));
+      border: 1.5px solid var(--ink);
+      border-bottom: 0;
+      border-radius: 9px 12px 0 0;
+    }
+    .folder-btn.is-active .pocket { box-shadow: 5px 5px 0 var(--ink); }
+    .folder-label {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+    .folder-sub { font-size: 13px; font-weight: 500; color: var(--muted); }
+    .folder-btn.is-active .folder-label { background: linear-gradient(transparent 62%, var(--butter) 62% 96%, transparent 96%); }
+
+    .case-stage { position: relative; min-height: 480px; }
+    .case-panel {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: clamp(22px, 3.5vw, 44px);
+      padding: clamp(24px, 3.5vw, 44px);
+      background: #fffdf8;
+      border: 1.5px solid var(--ink);
+      border-radius: var(--r-card);
+      box-shadow: 5px 5px 0 var(--ink);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: opacity .45s var(--ease), transform .45s var(--ease), visibility .45s;
+    }
+    .case-panel.is-active { opacity: 1; visibility: visible; transform: translateY(0); }
+    .case-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      padding: clamp(20px, 2.5vw, 30px);
+      border: 1.5px solid var(--ink);
+      border-radius: 12px;
+      background: var(--panel-c, var(--pink));
+    }
+    .case-side-en { font-family: var(--display); font-style: italic; font-weight: 700; font-size: 24px; line-height: 1.2; }
+    .case-side h3 { margin: 0; font-size: clamp(24px, 2.4vw, 31px); font-weight: 900; line-height: 1.35; }
+    .case-copy > p { margin-bottom: 20px; font-size: clamp(15.5px, 1.5vw, 17.5px); line-height: 1.8; }
+    .case-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+    .case-points li { display: grid; grid-template-columns: 104px 1fr; gap: 14px; align-items: start; }
+    .case-points strong {
+      justify-self: start;
+      padding: 3px 12px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .case-points span { font-size: 14.5px; line-height: 1.65; color: var(--muted); }
+
+    /* 其他案例：傾斜彩卡 */
+    .range-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 34px);
+    }
+    .range-card {
+      display: flex;
+      flex-direction: column;
+      padding: 26px 24px 24px;
+      border: 1.5px solid var(--ink);
+      border-radius: var(--r-card);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      transition: transform .3s var(--ease);
+    }
+    .range-card:nth-child(1) { background: #f5b48d; transform: rotate(-1.6deg); }
+    .range-card:nth-child(2) { background: var(--lav); transform: rotate(1.2deg); }
+    .range-card:nth-child(3) { background: var(--pink); transform: rotate(-1deg); }
+    .range-card:nth-child(4) { background: var(--butter); transform: rotate(1.4deg); }
+    .range-card:nth-child(5) { background: var(--sky); transform: rotate(-1.3deg); }
+    .range-card:nth-child(6) { background: var(--mint); transform: rotate(1.6deg); }
+    .range-card:hover { transform: rotate(0) translateY(-6px); }
+    .range-en { font-family: var(--display); font-style: italic; font-size: 17px; opacity: .75; }
+    .range-card h3 { margin: 6px 0 14px; font-size: 20px; font-weight: 900; line-height: 1.4; }
+    .range-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+    .range-card li { font-size: 14px; line-height: 1.55; opacity: .85; padding-left: 16px; position: relative; }
+    .range-card li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: currentColor; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+    .glyph { margin-top: 26px; width: 56px; aspect-ratio: 1; background: var(--ink); }
+    .g-arrow { clip-path: polygon(100% 0, 100% 70%, 76% 70%, 76% 41%, 17% 100%, 0 83%, 59% 24%, 30% 24%, 30% 0); }
+    .g-plus { clip-path: polygon(35% 0, 65% 0, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0 65%, 0 35%, 35% 35%); }
+    .g-asterisk { clip-path: polygon(50% 0, 60% 35%, 90% 15%, 70% 45%, 100% 50%, 70% 55%, 90% 85%, 60% 65%, 50% 100%, 40% 65%, 10% 85%, 30% 55%, 0 50%, 30% 45%, 10% 15%, 40% 35%); }
+    .g-circle { border-radius: 50%; }
+    .g-diamond { width: 50px; margin-left: 5px; border-radius: 22%; transform: rotate(45deg); }
+    .g-star { clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+
+    /* 核心能力：貼紙牆 */
+    .capabilities { background-color: var(--butter-soft); border-block: 1.5px solid var(--ink);
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 35px, rgba(255, 255, 255, .45) 35px 36px),
+        repeating-linear-gradient(90deg, transparent 0 35px, rgba(255, 255, 255, .45) 35px 36px);
+    }
+    .capability-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 12px;
+      max-width: 950px;
+    }
+    .capability-list li {
+      padding: 11px 20px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: #fffdf8;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      font-size: 14.5px;
+      font-weight: 700;
+    }
+    .capability-list li:nth-child(odd) { transform: rotate(-1.3deg); }
+    .capability-list li:nth-child(even) { transform: rotate(1.1deg); }
+    .capability-list li:nth-child(3n) { background: var(--lav-soft); }
+    .capability-list li:nth-child(4n) { background: var(--pink); }
+    .capability-note {
+      margin: 36px 0 0;
+      max-width: 560px;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    /* 職涯 */
+    .career-grid {
+      display: grid;
+      grid-template-columns: .58fr 1.42fr;
+      gap: clamp(34px, 7vw, 100px);
+    }
+    .career-intro { position: sticky; top: 110px; align-self: start; color: var(--muted); }
+    .career-list { display: grid; }
+    .career-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 26px;
+      padding: 28px 0;
+      border-bottom: 1.5px dashed rgba(35, 32, 28, .35);
+    }
+    .career-row:last-child { border-bottom: 0; }
+    .career-year { font-family: var(--display); font-style: italic; font-weight: 700; font-size: 19px; color: var(--d-purple); line-height: 1.4; }
+    .career-row h3 { margin-bottom: 2px; font-size: 20px; font-weight: 900; }
+    .career-company { margin-bottom: 10px; font-weight: 700; font-size: 15px; background: linear-gradient(transparent 62%, var(--mint-soft) 62% 96%, transparent 96%); display: inline-block; }
+    .career-row p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* 聯繫 */
+    .contact-block {
+      position: relative;
+      padding: clamp(40px, 6vw, 80px) clamp(26px, 5vw, 70px);
+      border: 1.5px solid var(--ink);
+      border-radius: 26px;
+      background: var(--lav);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+    .contact-block .section-title { margin-bottom: 24px; max-width: 760px; }
+    .contact-copy { max-width: 580px; margin-bottom: 36px; font-size: clamp(16px, 1.7vw, 19px); line-height: 1.8; }
+    .contact-star-a { position: absolute; top: -16px; right: 8%; width: 34px; }
+    .contact-star-b { position: absolute; bottom: 24px; right: 5%; width: 22px; background: var(--pink); }
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 40px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .polaroid { margin-inline: auto; }
+      .folder-grid { grid-template-columns: repeat(2, 1fr); }
+      .case-stage { min-height: 760px; }
+      .case-panel { grid-template-columns: 1fr; }
+      .range-cards { grid-template-columns: repeat(2, 1fr); }
+      .career-grid { grid-template-columns: 1fr; }
+      .career-intro { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner { min-height: 60px; }
+      .menu-button { display: block; cursor: pointer; }
+      .nav .button { display: none; }
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 20px var(--pad) 26px;
+        display: grid;
+        gap: 16px;
+        background: var(--paper);
+        border-bottom: 1.5px solid var(--ink);
+        transform: translateY(-130%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform .4s var(--ease), opacity .3s ease, visibility .4s;
+        z-index: -1;
+      }
+      .nav-links.is-open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+      .hero { padding-top: 96px; }
+      .hero h1 { font-size: clamp(52px, 15vw, 76px); }
+      .approach-row { grid-template-columns: 1fr; gap: 12px; }
+      .folder-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .folder { height: 132px; }
+      .folder-label { font-size: 17px; }
+      .case-stage { min-height: 980px; }
+      .case-points li { grid-template-columns: 1fr; gap: 6px; }
+      .range-cards { grid-template-columns: 1fr; }
+      .range-card, .range-card:hover { transform: rotate(0); }
+      .career-row { grid-template-columns: 1fr; gap: 6px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .marquee-track { animation: none; }
+    }
+  </style>
 </head>
+<body id="top">
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <div id="nav-sentinel" aria-hidden="true"></div>
 
-<body>
+  <nav class="nav" aria-label="主要導覽">
+    <div class="shell nav-inner">
+      <a class="wordmark" href="#top">Yenmi.</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-label="開啟選單">Menu</button>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#approach">方法</a>
+          <a href="#work">作品</a>
+          <a href="#career">經歷</a>
+          <a href="#contact">聯繫</a>
+        </div>
+        <a class="button primary" href="https://line.me/ti/p/@753jzazx" target="_blank" rel="noopener">LINE 聯繫</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Star Cluster (4 Pink Stars) -->
-    <div class="star-container">
-        <div class="star star-1"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L53 40 L85 45 L53 52 L50 95 L47 52 L15 45 L47 40 Z" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M50 25 L55 45 L75 50 L55 55 L50 75 L45 55 L25 50 L45 45 Z" />
-                <path d="M30 30 L45 45 M70 30 L55 45 M30 70 L45 55 M70 70 L55 55" stroke-width="3"
-                    stroke-linecap="round" />
-            </svg></div>
-        <div class="star star-2"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L53 40 L85 45 L53 52 L50 95 L47 52 L15 45 L47 40 Z" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M50 25 L55 45 L75 50 L55 55 L50 75 L45 55 L25 50 L45 45 Z" />
-                <path d="M30 30 L45 45 M70 30 L55 45 M30 70 L45 55 M70 70 L55 55" stroke-width="3"
-                    stroke-linecap="round" />
-            </svg></div>
-        <div class="star star-3"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L53 40 L85 45 L53 52 L50 95 L47 52 L15 45 L47 40 Z" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M50 25 L55 45 L75 50 L55 55 L50 75 L45 55 L25 50 L45 45 Z" />
-                <path d="M30 30 L45 45 M70 30 L55 45 M30 70 L45 55 M70 70 L55 55" stroke-width="3"
-                    stroke-linecap="round" />
-            </svg></div>
-        <div class="star star-4"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L53 40 L85 45 L53 52 L50 95 L47 52 L15 45 L47 40 Z" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M50 25 L55 45 L75 50 L55 55 L50 75 L45 55 L25 50 L45 45 Z" />
-                <path d="M30 30 L45 45 M70 30 L55 45 M30 70 L45 55 M70 70 L55 55" stroke-width="3"
-                    stroke-linecap="round" />
-            </svg></div>
+  <main id="main-content">
+    <header class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <span class="sticker reveal">Marketing × AI Workflow</span>
+          <h1 class="reveal">make it<br><em>work.</em></h1>
+          <p class="hero-kicker reveal">
+            12 年整合行銷，把<strong>業務、行銷與 AI</strong> 整理成能運作、能交接、能優化的系統。
+          </p>
+          <div class="hero-actions reveal">
+            <a class="button primary" href="#work">查看作品</a>
+            <a class="button" href="廖晏君-2026-104.pdf" target="_blank" rel="noopener">下載 PDF 履歷</a>
+          </div>
+        </div>
+
+        <div class="polaroid-wrap reveal">
+          <span class="star hero-star-a" aria-hidden="true"></span>
+          <figure class="polaroid">
+            <span class="tape" aria-hidden="true"></span>
+            <img src="yenmi-photo.jpg" alt="Yenmi 於品牌活動現場的個人照片">
+            <figcaption>Yenmi / Taipei</figcaption>
+            <span class="star hero-star-b" aria-hidden="true"></span>
+          </figure>
+          <div class="badge-12">12 years<br>in motion</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>企劃 × AIO / GEO × 廣告 <span class="star"></span> 業務 × 行銷 × AI <span class="star"></span> <i>把傳統行銷接成 AI workflow</i> <span class="star"></span> 12 年整合行銷 <span class="star"></span></span>
+        <span>企劃 × AIO / GEO × 廣告 <span class="star"></span> 業務 × 行銷 × AI <span class="star"></span> <i>把傳統行銷接成 AI workflow</i> <span class="star"></span> 12 年整合行銷 <span class="star"></span></span>
+      </div>
     </div>
 
-    <nav>
-        <div class="container nav-content">
-            <div class="logo">YEN.</div>
-            <div class="nav-links" style="display: flex; gap: 2rem; font-size: 0.9rem; font-weight: 500;">
-                <a href="#services">技能</a>
-                <a href="#experience">經歷</a>
-                <a href="https://www.threads.com/@a_novel_13" target="_blank" rel="noopener noreferrer">Threads</a>
-                <a href="https://line.me/ti/p/@753jzazx" target="_blank" rel="noopener noreferrer">Line</a>
-            </div>
+    <section id="approach">
+      <div class="shell">
+        <h2 class="section-title reveal">Classic marketing,<br><em class="hl-lav">rewired.</em></h2>
+        <div class="approach-list">
+          <article class="approach-row reveal">
+            <div class="approach-no">1</div>
+            <div><h3>先看商業，再選工具</h3><p>從業務目標、受眾、內容與轉換開始，不為了 automation 而 automation。</p></div>
+          </article>
+          <article class="approach-row reveal">
+            <div class="approach-no">2</div>
+            <div><h3>把經驗變成流程</h3><p>把依賴個人記憶的工作，整理成資料入口、決策關卡、交付規格與 Playbook。</p></div>
+          </article>
+          <article class="approach-row reveal">
+            <div class="approach-no">3</div>
+            <div><h3>讓 AI 留在正確的位置</h3><p>AI 負責整理、比對、生成與提醒；商業判斷、品牌責任與最後決策由人掌握。</p></div>
+          </article>
         </div>
-    </nav>
+      </div>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero">
-            <div class="container">
-                <div class="hero-tag">hello 各位，我是Yenmi <span class="kaomoji" data-original="( • ω • )ノ"
-                        data-alt1="( ˘ ɜ˘) ♬♪" data-alt2="(◕‿◕)♡" data-alt3="( ´ ▽ ` )ノ">( • ω • )ノ</span></div>
-                <h1 class="text-display-lg">
-                    Marketing Manager<br>
-                    <span style="font-style: italic; font-weight: 400; font-size: 0.8em; opacity: 0.8;">x</span> AI
-                    agent Builder
-                </h1>
-                <p
-                    style="margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
-                    結合 12 年行銷經驗與AI自動化技術，<br>為企業構建不僅止於創意，<br>更是<span class="bg-highlight-ai">精準運轉的自動系統</span>。
-                </p>
-                <div class="hero-btns">
-                    <a href="https://pda.104.com.tw/profile/share/22hmSvm8nUkBq35baeFt6qqjYEZhhuMW"
-                        class="btn btn-outline" target="_blank" rel="noopener noreferrer">前往104履歷</a>
-                    <a href="https://yenmi13.github.io/solarnav/" class="btn btn-outline" target="_blank"
-                        rel="noopener noreferrer">Vibe coding作品：風格太陽系</a>
-                    <a href="https://yenmi13.github.io/qrcode/" class="btn btn-outline" target="_blank"
-                        rel="noopener noreferrer">vibe coding作品： 整合行銷工具盒</a>
-                </div>
-            </div>
-        </section>
+    <section class="work" id="work">
+      <div class="shell">
+        <h2 class="section-title reveal">Open the<br><em>folders.</em></h2>
 
-        <!-- Traction Section -->
-        <section id="traction">
-            <div class="container">
-                <div class="text-mono">Data Achievements</div>
-                <h2 class="text-section-title">專案實績</h2>
-
-                <div class="metrics-grid">
-                    <div class="metric-item">
-                        <div class="metric-value" data-count="33000000" data-prefix="$" data-format="comma">$3</div>
-                        <div class="metric-label">8案累積募資總額</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" data-count="45" data-suffix="場">10場</div>
-                        <div class="metric-label">OMO 整合活動</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" data-count="500" data-suffix="人">100人</div>
-                        <div class="metric-label">社群KOL/KOC合作人數</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-value" data-count="30" data-suffix="家">30家</div>
-                        <div class="metric-label">媒體合作數量</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text">\(・ω・\)<br>
-                        <h2 class="text-section-title">網路背後的「YEN.」</h2>
-                        <p>
-                            我是 Yen，作為一個擁有 12 年經驗的行銷人，我深知創意的珍貴。
-                        </p>
-                        <p>
-                            我利用AI Agent、部署自動化工作流建立護城河，讓繁瑣的數據分析與行政庶務自動運轉，好讓我能有更多的餘裕，去打磨一句動人的文案、去設計一場有溫度的 OMO
-                            體驗，好去<span class="bg-highlight-ai">真正地與「人」連結。</span><br>
-
-                        <div class="tags-cloud">
-                            <span class="tag">#專案管理</span>
-                            <span class="tag">#12年整合行銷</span>
-
-
-                        </div>
-                    </div>
-                    <div class="about-visual">
-                        <img src="yenmi-photo.png" alt="Yen - Marketing Manager">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services">
-            <div class="container">
-                <div class="text-mono" style="color: var(--deep-teal);">Core Expertise</div>
-                <h2 class="text-section-title">核心技能</h2>
-
-                <div class="services-grid">
-                    <!-- Module A -->
-                    <div class="service-card">
-                        <div class="card-header">
-                            <span class="module-badge">Brand Strategy</span>
-                        </div>
-                        <h3>品牌全案策略</h3>
-                        <ul class="service-list">
-                            <li>品牌全案策略 (Brand Strategy)</li>
-                            <li>OMO 線上線下整合佈局</li>
-                            <li>群眾募資操盤 (嘖嘖)</li>
-                            <li>產品定位與定價策略</li>
-                        </ul>
-                    </div>
-
-                    <!-- Module B -->
-                    <div class="service-card ai-card">
-                        <div class="card-header">
-                            <span class="module-badge">AI Transformation</span>
-                        </div>
-                        <h3>AI 數位轉型</h3>
-                        <ul class="service-list">
-                            <li>AI Agent 開發與部署</li>
-                            <li>行銷自動化工作流串接</li>
-                            <li>行政流程自動化 (降低人力成本)</li>
-                        </ul>
-                    </div>
-
-                    <!-- Module C -->
-                    <div class="service-card">
-                        <div class="card-header">
-                            <span class="module-badge">Growth Marketing</span>
-                        </div>
-                        <h3>成長行銷</h3>
-                        <ul class="service-list">
-                            <li>ROAS 廣告成效優化</li>
-                            <li>KOL / KOC 行銷佈局</li>
-                            <li>數據分析 (GA4 / Looker Studio)</li>
-                            <li>CRM 會員經營策略</li>
-                        </ul>
-                    </div>
-
-                    <!-- Module D -->
-                    <div class="service-card social-card">
-                        <div class="card-header">
-                            <span class="module-badge">Social Media</span>
-                        </div>
-                        <h3>社群經營</h3>
-                        <ul class="service-list">
-                            <li>Threads/FB/edm 多平台操作</li>
-                            <li>高轉換銷售文案與活動規劃</li>
-                            <li>SEO 關鍵字策略與品牌 Tone & Manner 整合</li>
-                        </ul>
-                    </div>
-
-                    <!-- Module E -->
-                    <div class="service-card">
-                        <div class="card-header">
-                            <span class="module-badge">KOL Partnership</span>
-                        </div>
-                        <h3>KOL合作/品牌聯名</h3>
-                        <ul class="service-list">
-                            <li>精準選人與數據分析（平均20-50萬/檔，總觸及破50萬人次）</li>
-                            <li>大型品牌聯名（pazzo、周湯豪 REALIVE ）</li>
-                            <li>實體活動高出席率（KOL/媒體 出席率達 70% 以上）</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience">
-            <div class="container">
-                <h2 class="text-section-title">職涯歷程</h2>
-
-                <div class="timeline-container">
-                    <div class="timeline-block">
-                        <span class="timeline-date">2025.10 - 2025.12</span>
-                        <h4 class="timeline-role">行銷經理</h4>
-                        <div class="timeline-company">域動行銷 - mula team</div>
-                        <p class="timeline-desc">執行新創募資平台的品牌建構與專案執行</p>
-                    </div>
-
-                    <div class="timeline-block">
-                        <span class="timeline-date">2025 - 2025.10</span>
-                        <h4 class="timeline-role">接案</h4>
-                        <div class="timeline-company">專案行銷執行</div>
-                        <p class="timeline-desc">專案：Norns 季度行銷執行 & IP快閃店公關、B&O 新品上市規劃、Maison Margiela 開幕社群</p>
-                    </div>
-
-                    <div class="timeline-block">
-                        <span class="timeline-date">2019 - 2024</span>
-                        <h4 class="timeline-role">行銷經理</h4>
-                        <div class="timeline-company">Bitplay </div>
-                        <p class="timeline-desc">DTC 品牌全案操盤。主導 Shopify 官網與嘖嘖募資專案 (ROAS 15.3)，帶領 3-5 人團隊。
-                        </p>
-                    </div>
-
-                    <div class="timeline-block">
-                        <span class="timeline-date">2017 - 2019</span>
-                        <h4 class="timeline-role">公關行銷</h4>
-                        <div class="timeline-company">Giorgio Armani</div>
-                        <p class="timeline-desc">VIP 頂級客群經營，與媒體公關活動策劃與執行。</p>
-                    </div>
-
-                    <div class="timeline-block">
-                        <span class="timeline-date">2012 - 2017</span>
-                        <h4 class="timeline-role">副設計總監</h4>
-                        <div class="timeline-company">華得廣告/McCann (4A 廣告代理商)</div>
-                        <p class="timeline-desc">服務 Panasonic、循利寧、義美等大型客戶，負責視覺概念與創意執行。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="container">
-                <h2 class="text-section-title">期待合作</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 3rem;">無論是尋找全職領導者，或是專案技術顧問，我隨時準備好為您的業務注入系統化動能。</p>
-
-                <div class="contact-options">
-                    <div class="contact-box">
-                        <div class="contact-role">全職行銷主管</div>
-                        <p class="contact-desc">尋找能帶領團隊轉型的企業合作夥伴。</p>
-                        <div
-                            style="margin: 1rem 0; padding: 1rem; background: rgba(0, 77, 77, 0.05); border-radius: 4px; font-size: 0.95rem; line-height: 1.8;">
-                            <div><strong>希望待遇：</strong>月薪 65,000 元以上</div>
-                            <div><strong>希望地點：</strong>台北市</div>
-                            <div><strong>工作型態：</strong>可遠端工作</div>
-                        </div>
-                        <a href="https://line.me/R/ti/p/@753jzazx" class="btn btn-outline"
-                            style="border-color: var(--neon-green); color: var(--neon-green);" target="_blank"
-                            rel="noopener noreferrer">聯繫面談</a>
-                    </div>
-
-                    <div class="contact-box">
-                        <div class="contact-role">專案合作</div>
-                        <p class="contact-desc">針對募資、AI 導入或行銷執行的專案合作。</p>
-                        <div
-                            style="margin: 1rem 0; padding: 1rem; background: rgba(0, 77, 77, 0.05); border-radius: 4px; font-size: 0.95rem; line-height: 1.8;">
-                            <div>✦ 募資專案策劃與執行</div>
-                            <div>✦ AI Agent 行銷工作流搭建</div>
-                            <div>✦ 視覺與策略企劃</div>
-                        </div>
-                        <a href="https://line.me/R/ti/p/@753jzazx" class="btn btn-outline"
-                            style="border-color: var(--neon-green); color: var(--neon-green);" target="_blank"
-                            rel="noopener noreferrer">聯繫洽談</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="logo" style="margin-bottom: 1rem;">YEN.</div>
-            <p class="footer-text">© 2026 Yenmi.</p>
+        <div class="folder-grid reveal" role="tablist" aria-label="精選案例">
+          <button class="folder-btn is-active" type="button" data-case="0" role="tab" aria-selected="true" style="--folder-c: var(--pink);">
+            <span class="folder">
+              <span class="paper paper-a">需求表單</span>
+              <span class="paper paper-b">企劃 Brief</span>
+              <span class="paper paper-c">成效回饋</span>
+              <span class="pocket"></span>
+            </span>
+            <span class="folder-label">Sales × Marketing</span><br>
+            <span class="folder-sub">業務行銷整合</span>
+          </button>
+          <button class="folder-btn" type="button" data-case="1" role="tab" aria-selected="false" style="--folder-c: var(--lav);">
+            <span class="folder">
+              <span class="paper paper-a">AI 日報</span>
+              <span class="paper paper-b">Effective CPL</span>
+              <span class="paper paper-c">漏斗追蹤</span>
+              <span class="pocket"></span>
+            </span>
+            <span class="folder-label">Ads Ops</span><br>
+            <span class="folder-sub">廣告名單營運</span>
+          </button>
+          <button class="folder-btn" type="button" data-case="2" role="tab" aria-selected="false" style="--folder-c: var(--mint);">
+            <span class="folder">
+              <span class="paper paper-a">Brief小精靈</span>
+              <span class="paper paper-b">切角小精靈</span>
+              <span class="paper paper-c">品牌 PDF</span>
+              <span class="pocket"></span>
+            </span>
+            <span class="folder-label">Content Tools</span><br>
+            <span class="folder-sub">自製 AI 工具</span>
+          </button>
+          <button class="folder-btn" type="button" data-case="3" role="tab" aria-selected="false" style="--folder-c: var(--butter);">
+            <span class="folder">
+              <span class="paper paper-a">關鍵字矩陣</span>
+              <span class="paper paper-b">Topic Cluster</span>
+              <span class="paper paper-c">AI 引用地圖</span>
+              <span class="pocket"></span>
+            </span>
+            <span class="folder-label">Search</span><br>
+            <span class="folder-sub">SEO / AIO / GEO</span>
+          </button>
         </div>
-    </footer>
 
-    <script>
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
+        <div class="case-stage reveal">
+          <article class="case-panel is-active" role="tabpanel" style="--panel-c: var(--pink);">
+            <div class="case-side">
+              <div class="case-side-en">Sales × Marketing</div>
+              <h3>AI 業務 × 行銷整合與流程設計</h3>
+            </div>
+            <div class="case-copy">
+              <p>把業務接案、企劃 Brief、創作者內容、廣告名單與成效回饋接成同一條資訊鏈，讓行銷從接單執行，升級為可追蹤、可優化的商業流程。</p>
+              <ul class="case-points">
+                <li><strong>行銷底座</strong><span>需求訪談、Brief、漏斗、廣告判讀、跨部門專案管理</span></li>
+                <li><strong>系統方法</strong><span>Google Sheets、Notion、互動表單、結構化資料與 Make</span></li>
+                <li><strong>留下成果</strong><span>明確的輸入輸出、人工確認點與跨角色交付規格</span></li>
+              </ul>
+            </div>
+          </article>
 
-        // Hero Animation
-        const tl = gsap.timeline();
-        tl.from(".hero-tag", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" })
-            .from(".text-display-lg", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.5")
-            .from("#hero p", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
-            .from(".hero-btns", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6");
+          <article class="case-panel" role="tabpanel" style="--panel-c: var(--lav);">
+            <div class="case-side">
+              <div class="case-side-en">Ads Ops</div>
+              <h3>廣告與名單營運 workflow</h3>
+            </div>
+            <div class="case-copy">
+              <p>整合 Meta Ads、Google Sheets、Make 與 AI 日報，將媒體操作、有效名單、業務量能與後端轉換放進同一套決策系統。</p>
+              <ul class="case-points">
+                <li><strong>行銷底座</strong><span>媒體策略、素材測試、CPL、預算配置與轉換漏斗</span></li>
+                <li><strong>系統方法</strong><span>每日資料同步、素材健康度、Effective CPL 與資料新鮮度檢查</span></li>
+                <li><strong>留下成果</strong><span>廣告判讀不再只看表面 CPL，而能回到名單品質與商業效率</span></li>
+              </ul>
+            </div>
+          </article>
 
-        // Kaomoji Easter Egg
-        const kaomoji = document.querySelector('.kaomoji');
-        const heroTag = document.querySelector('.hero-tag');
+          <article class="case-panel" role="tabpanel" style="--panel-c: var(--mint);">
+            <div class="case-side">
+              <div class="case-side-en">Content Tools</div>
+              <h3>自製工具，標準化創作者內容流程</h3>
+            </div>
+            <div class="case-copy">
+              <p>設計 Brief小精靈與切角小精靈，把客戶需求轉成企劃判斷，再轉成多位創作者不撞題、符合平台與品類規範的 PDF。</p>
+              <ul class="case-points">
+                <li><strong>行銷底座</strong><span>品牌訊息、內容策略、創作者溝通、編輯與品質管理</span></li>
+                <li><strong>系統方法</strong><span>互動表單、結構化資料、品牌版型與必要人工審核</span></li>
+                <li><strong>留下成果</strong><span>從單一範例推進到多品牌實際交付，並能交給非技術同事使用</span></li>
+              </ul>
+            </div>
+          </article>
 
-        if (kaomoji && heroTag) {
-            const original = kaomoji.dataset.original;
-            const alts = [kaomoji.dataset.alt1, kaomoji.dataset.alt2, kaomoji.dataset.alt3];
+          <article class="case-panel" role="tabpanel" style="--panel-c: var(--butter);">
+            <div class="case-side">
+              <div class="case-side-en">Search</div>
+              <h3>SEO / AIO / GEO 規劃與執行</h3>
+            </div>
+            <div class="case-copy">
+              <p>在雙品牌年度合作中，把傳統搜尋策略延伸至 AI 搜尋，建立關鍵字矩陣、Topic Cluster、AI 引用地圖與多來源內容分工。</p>
+              <ul class="case-points">
+                <li><strong>行銷底座</strong><span>品牌定位、搜尋意圖、競品研究、內容分層與年度規劃</span></li>
+                <li><strong>系統方法</strong><span>AI 提及檢查、引用來源、內容空白、Canonical 與結構化內容</span></li>
+                <li><strong>留下成果</strong><span>讓官網、創作者內容與社群聲量各自承擔不同的搜尋任務</span></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-            // Trigger on both kaomoji and hero-tag hover
-            const changeKaomoji = () => {
-                const randomAlt = alts[Math.floor(Math.random() * alts.length)];
-                kaomoji.textContent = randomAlt;
-            };
+    <section id="more-work">
+      <div class="shell">
+        <h2 class="section-title reveal">Range without<br><em class="hl-pink">the noise.</em></h2>
+        <div class="range-cards reveal">
+          <article class="range-card">
+            <div class="range-en">rollout</div>
+            <h3>產品 rollout 與跨部門導入</h3>
+            <ul>
+              <li>跨 8 種角色的上線計畫</li>
+              <li>公告、教學與內訓一套收齊</li>
+              <li>風險控管與 retro 收斂</li>
+            </ul>
+            <span class="glyph g-arrow" aria-hidden="true"></span>
+          </article>
+          <article class="range-card">
+            <div class="range-en">integrated</div>
+            <h3>整合行銷專案規劃</h3>
+            <ul>
+              <li>從商業模式推進到落地</li>
+              <li>網站、DM、群發訊息與條款</li>
+              <li>跨部門與法務協調</li>
+            </ul>
+            <span class="glyph g-plus" aria-hidden="true"></span>
+          </article>
+          <article class="range-card">
+            <div class="range-en">adoption</div>
+            <h3>實戰內訓與組織導入</h3>
+            <ul>
+              <li>Agent、Skill、MCP 白話化</li>
+              <li>真實工作情境現場練習</li>
+              <li>非技術同事當場上手</li>
+            </ul>
+            <span class="glyph g-asterisk" aria-hidden="true"></span>
+          </article>
+          <article class="range-card">
+            <div class="range-en">crowdfunding</div>
+            <h3>募資整合行銷</h3>
+            <ul>
+              <li>定位到上線單人整合推進</li>
+              <li>KOL、拍攝與廣告 brief</li>
+              <li>影音腳本與上市宣傳</li>
+            </ul>
+            <span class="glyph g-circle" aria-hidden="true"></span>
+          </article>
+          <article class="range-card">
+            <div class="range-en">prototype</div>
+            <h3>產品原型與獨立開發</h3>
+            <ul>
+              <li>ESP32 實體資訊卡片</li>
+              <li>macOS 桌寵 App</li>
+              <li>AI-GM 文字 AVG 與解謎 demo</li>
+            </ul>
+            <span class="glyph g-diamond" aria-hidden="true"></span>
+          </article>
+          <article class="range-card">
+            <div class="range-en">track record</div>
+            <h3>ROAS 15.3 與千萬募資實績</h3>
+            <ul>
+              <li>單一募資專案 ROAS 15.3</li>
+              <li>千萬級募資金額操盤</li>
+              <li>傳統行銷實績是根</li>
+            </ul>
+            <span class="glyph g-star" aria-hidden="true"></span>
+          </article>
+        </div>
+      </div>
+    </section>
 
-            const resetKaomoji = () => {
-                kaomoji.textContent = original;
-            };
+    <section class="capabilities" id="capabilities">
+      <div class="shell">
+        <h2 class="section-title reveal">Tools change.<br><em class="hl-mint">Craft stays.</em></h2>
+        <ul class="capability-list reveal">
+          <li>AI workflow 與行銷自動化架構</li>
+          <li>業務 × 行銷流程整合與需求轉譯</li>
+          <li>Meta Ads 投放、成效分析與漏斗優化</li>
+          <li>整合行銷與品牌策略</li>
+          <li>AI 工具規劃、測試與導入</li>
+          <li>Make、Google Sheets、Notion 與 API 串接</li>
+          <li>內容策略、SEO／AIO／GEO 與創作者合作</li>
+          <li>跨部門專案管理與產品 rollout</li>
+          <li>SOP、Playbook 與知識系統</li>
+          <li>AI 內訓與組織 adoption</li>
+          <li>產品原型與快速驗證</li>
+        </ul>
+        <p class="capability-note reveal">能力會隨工具更新，但把混亂整理成系統的方法不會。</p>
+      </div>
+    </section>
 
-            heroTag.addEventListener('mouseenter', changeKaomoji);
-            heroTag.addEventListener('mouseleave', resetKaomoji);
+    <section id="career">
+      <div class="shell">
+        <h2 class="section-title reveal">Twelve years,<br><em class="hl-lav">still moving.</em></h2>
+        <div class="career-grid">
+          <div class="career-intro reveal">
+            <p>從 4A 創意、高端精品公關、DTC 品牌與群眾募資，一路走到內容平台、廣告數據與 AI workflow。媒介一直變，我處理的始終是同一件事：讓品牌被理解，讓團隊能執行，讓結果能被驗證。</p>
+          </div>
+          <div class="career-list">
+            <article class="career-row reveal">
+              <div class="career-year">2026 - now</div>
+              <div><h3>Marketing / AI Workflow</h3><div class="career-company">vocus 方格子</div><p>廣告投放、專案執行、內容與 SEO 規劃、資料整理，以及業務與行銷工作流整合。</p></div>
+            </article>
+            <article class="career-row reveal">
+              <div class="career-year">2025</div>
+              <div><h3>Marketing Manager</h3><div class="career-company">Mula / 域動行銷</div><p>新創募資平台品牌建構、OMO 專案、KOL／KOC 與上市執行。</p></div>
+            </article>
+            <article class="career-row reveal">
+              <div class="career-year">2019 - 2024</div>
+              <div><h3>Marketing Manager</h3><div class="career-company">bitplay</div><p>DTC 品牌與 Shopify 全案，帶領行銷團隊，操盤募資、KOL 聯名、發表會與成長行銷。</p></div>
+            </article>
+            <article class="career-row reveal">
+              <div class="career-year">2017 - 2019</div>
+              <div><h3>PR &amp; Marketing</h3><div class="career-company">Giorgio Armani</div><p>精品公關、VIP 高端客群經營、媒體與品牌活動。</p></div>
+            </article>
+            <article class="career-row reveal">
+              <div class="career-year">2012 - 2017</div>
+              <div><h3>Associate Art Director</h3><div class="career-company">McCann / 4A Agency</div><p>服務 Panasonic、義美、味全等品牌，負責創意概念、視覺語言與整合素材。</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="shell">
+        <div class="contact-block reveal">
+          <span class="star contact-star-a" aria-hidden="true"></span>
+          <h2 class="section-title">I build marketing<br>that can <em>move.</em></h2>
+          <p class="contact-copy">我正在尋找能讓資深行銷判斷與 AI 系統能力一起發揮的職位。不是增加一個會下 prompt 的人，而是增加一個能把混亂整理成成果的人。</p>
+          <div class="hero-actions">
+            <a class="button" href="https://line.me/ti/p/@753jzazx" target="_blank" rel="noopener">LINE 聯繫</a>
+            <a class="button" href="https://www.threads.com/@a_novel_13" target="_blank" rel="noopener">Threads 找我</a>
+          </div>
+          <span class="star contact-star-b" aria-hidden="true"></span>
+        </div>
+        <footer>
+          <span>Yenmi / Taipei</span>
+          <span>Marketing strategy × systems × human sense</span>
+          <span>© 2026</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const nav = document.querySelector(".nav");
+    const sentinel = document.querySelector("#nav-sentinel");
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+
+    new IntersectionObserver(([entry]) => {
+      nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+    }).observe(sentinel);
+
+    menuButton.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.textContent = open ? "Close" : "Menu";
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.textContent = "Menu";
+    }));
+
+    const tabs = [...document.querySelectorAll(".folder-btn")];
+    const panels = [...document.querySelectorAll(".case-panel")];
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(item => {
+          item.classList.remove("is-active");
+          item.setAttribute("aria-selected", "false");
+        });
+        panels.forEach(panel => panel.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        tab.setAttribute("aria-selected", "true");
+        panels[index].classList.add("is-active");
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
         }
-
-        // Traction Metrics
-        gsap.utils.toArray(".metric-item").forEach((item, i) => {
-            gsap.from(item, {
-                scrollTrigger: {
-                    trigger: "#traction",
-                    start: "top 70%",
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                delay: i * 0.1
-            });
-        });
-
-        // About Visualization
-        gsap.to(".about-visual img", {
-            scrollTrigger: {
-                trigger: "#about",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            },
-            scale: 1.1,
-            y: 20
-        });
-
-        // Service Cards Stagger
-        gsap.from(".service-card", {
-            scrollTrigger: {
-                trigger: "#services",
-                start: "top 75%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2
-        });
-
-        // Experience Timeline
-        gsap.utils.toArray(".timeline-block").forEach(block => {
-            gsap.from(block, {
-                scrollTrigger: {
-                    trigger: block,
-                    start: "top 85%",
-                },
-                x: -30,
-                opacity: 0,
-                duration: 0.6
-            });
-        });
-
-        // Smart Nav Contrast Switching
-        // Detect when nav is over light/gray backgrounds and switch colors
-        const nav = document.querySelector('nav');
-        const lightSections = document.querySelectorAll('#about, #services, #experience');
-
-        lightSections.forEach(section => {
-            ScrollTrigger.create({
-                trigger: section,
-                start: "top top",
-                end: "bottom top",
-                onEnter: () => nav.classList.add('nav-dark'),
-                onLeave: () => nav.classList.remove('nav-dark'),
-                onEnterBack: () => nav.classList.add('nav-dark'),
-                onLeaveBack: () => nav.classList.remove('nav-dark')
-            });
-        });
-
-        // Count-up Animation for Metrics
-        const metricValues = document.querySelectorAll('.metric-value[data-count]');
-
-        metricValues.forEach(metric => {
-            const target = parseFloat(metric.dataset.count);
-            const decimals = parseInt(metric.dataset.decimals) || 0;
-            const prefix = metric.dataset.prefix || '';
-            const suffix = metric.dataset.suffix || '';
-            const useComma = metric.dataset.format === 'comma';
-
-            const runAnimation = () => {
-                gsap.fromTo({ val: 0 }, { val: 0 }, {
-                    val: target,
-                    duration: 0.5,
-                    ease: "power2.out",
-                    onUpdate: function () {
-                        let num = this.targets()[0].val;
-                        let formatted = useComma
-                            ? Math.round(num).toLocaleString('en-US')
-                            : num.toFixed(decimals);
-                        metric.textContent = prefix + formatted + suffix;
-                    }
-                });
-            };
-
-            ScrollTrigger.create({
-                trigger: metric,
-                start: "top 85%",
-                onEnter: runAnimation,
-                onEnterBack: runAnimation
-            });
-        });
-
-
-
-    </script>
+      });
+    }, { threshold: .12, rootMargin: "0px 0px -40px" });
+    document.querySelectorAll(".reveal").forEach(item => revealObserver.observe(item));
+  </script>
 </body>
-
 </html>
